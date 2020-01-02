@@ -1,28 +1,52 @@
 <document>
-	<stackTemplate theme="light">
-		<collectionList>
-			<shelf>
-				<header><title>Popular Movies</title></header>
-				<section>
-					{{#each movies }}
-					<lockup data-href-page="movie-details" data-href-page-options="{{toJSON this }}">
-						<img class="tile" src="{{poster_url poster_path }}"/>
-						<title class="showAndScrollTextOnHighlight">{{ title }}</title>
-					</lockup>
-					{{/each}}
-				</section>
-			</shelf>
-			<shelf>
-				<header><title>Popular TV Shows</title></header>
-				<section>
-					{{#each tvShows }}
-					<lockup data-href-page="tvshow-details" data-href-page-options="{{toJSON this }}">
-						<img class="tile" src="{{poster_url poster_path }}"/>
-						<title class="showAndScrollTextOnHighlight">{{ title }}</title>
-					</lockup>
-					{{/each}}
-				</section>
-			</shelf>
-		</collectionList>
-	</stackTemplate>
+  <productTemplate>
+    <banner>
+      <infoList>
+        <info>
+          <header>
+            <title>Director</title>
+          </header>
+          <text>{{ director }}</text>
+        </info>
+        <info>
+          <header>
+            <title>Writers</title>
+          </header>
+          {{#each writers}}
+            <text>{{this}}</text>
+          {{/each}}
+        </info>
+        <info>
+          <header>
+            <title>Guest Stars</title>
+          </header>
+          {{#each guestStars}}
+            <text>{{this}}</text>
+          {{/each}}
+        </info>
+      </infoList>
+      <stack>
+        <title>{{ episodeName }}</title>
+        <row>
+          <ratingBadge value="{{ siteRating }}"></ratingBadge>
+          <text>{{ firstAired }}</text>
+          <text>Season {{ season }}</text>
+          <text>Episode {{ episode }}</text>
+          <badge src="resource://{{ contentRating }}" style="tv-tint-color: rgb(255,255,255);" />
+        </row>
+        <description handlesOverflow="true">{{ description }}</description>
+        <row>
+          <buttonLockup data-href-page="play" data-href-page-options='{"season": {{ season }}, "episode": {{ episode }} }'>
+            <badge src="resource://button-preview" />
+            <title>Play</title>
+          </buttonLockup>
+          <buttonLockup data-href-page="home">
+            <badge src="resource://button-add" />
+            <title>New Episode</title>
+          </buttonLockup>
+        </row>
+      </stack>
+      <heroImg src="{{ image }}" />
+    </banner>
+  </productTemplate>
 </document>
