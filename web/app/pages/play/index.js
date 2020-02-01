@@ -7,7 +7,7 @@ const showError = code => {
         <alertTemplate>
           <title>Error (${code})</title>
           <description>The episode failed to download. Please try again.</description>
-          <button>
+          <button data-alert-dissmiss="close">
             <text>OK</text>
           </button>
         </alertTemplate>
