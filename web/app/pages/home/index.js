@@ -2,10 +2,32 @@ import ATV from 'atvjs';
 import template from './template.hbs';
 import { API_URL } from 'config';
 
+const presentModal = (title, description) => {
+  const info = `<?xml version="1.0" encoding="UTF-8" ?>
+      <document>
+          <descriptiveAlertTemplate>
+              <title>${title}</title>
+              <description>${description}</description>
+          </descriptiveAlertTemplate>
+      </document>
+  `;
+  ATV.Navigation.presentModal({ template: info, style: '' });
+};
+
 const HomePage = ATV.Page.create({
   name: 'home',
   url: `${API_URL}/episode`,
   template: template,
+  events: {
+		select: 'onSelect'
+  },
+  onSelect(event) {
+    const targetElem = event.target;
+    if (targetElem.tagName === 'description') {
+      const body = targetElem.textContent;
+      presentModal('', body);
+    }
+	},
   data: response => {
     return {
         episodeName: response.episodeName,
