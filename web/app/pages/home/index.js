@@ -3,7 +3,7 @@ import template from './template.hbs';
 import { API_URL } from 'config';
 
 const presentModal = (title, description) => {
-  const info = `<?xml version="1.0" encoding="UTF-8" ?>
+  const info = `
       <document>
           <descriptiveAlertTemplate>
               <title>${title}</title>
