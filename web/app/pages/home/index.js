@@ -27,6 +27,19 @@ const HomePage = ATV.Page.create({
       const body = targetElem.textContent;
       presentModal('', body);
     }
+    if (targetElem.textContent === 'Choose Episode') {
+      const template = `<document><formTemplate><textField id="episode-text"></textField><footer><button><text>Play</text></button></footer></formTemplate></document>`;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(template , "application/xml");
+      const episodeText = doc.getElementById("episode-text");
+      doc.addEventListener("select", () => {
+        const input = episodeText.getFeature('Keyboard').text;
+        navigationDocument.dismissModal();
+        const [season, episode] = [parseInt(input.substr(0,2), 10), parseInt(input.substr(2,2), 10)];
+        ATV.Navigation.navigate('play', {season, episode});
+      });
+      navigationDocument.presentModal(doc);
+    }
 	},
   data: response => {
     return {
