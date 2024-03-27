@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		044D002E1DF9E86A009D3685 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D002D1DF9E86A009D3685 /* AppDelegate.swift */; };
 		044D00321DF9E86A009D3685 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044D00311DF9E86A009D3685 /* Assets.xcassets */; };
+		55919F892BB4B7440071385A /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = 55919F882BB4B7440071385A /* app.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		044D00301DF9E86A009D3685 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
 		044D00311DF9E86A009D3685 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		044D00331DF9E86A009D3685 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55919F882BB4B7440071385A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = app.js; path = ../web/public/app.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 		044D00211DF9E86A009D3685 = {
 			isa = PBXGroup;
 			children = (
+				55919F882BB4B7440071385A /* app.js */,
 				044D002C1DF9E86A009D3685 /* Random Seinfeld */,
 				044D002B1DF9E86A009D3685 /* Products */,
 			);
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55919F892BB4B7440071385A /* app.js in Resources */,
 				044D00321DF9E86A009D3685 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

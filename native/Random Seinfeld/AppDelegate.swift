@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
     var appController: TVApplicationController?
     
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
-    static let tvBaseURL = "http://localhost:9001"
-    static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
+//    static let tvBaseURL = "http://localhost:9001"
+//    static let tvBootURL = "\(AppDelegate.tvBaseURL)/application.js"
     
     // MARK: Javascript Execution Helper
     
@@ -41,11 +41,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         let appControllerContext = TVApplicationControllerContext()
         
         // The JavaScript URL is used to create the JavaScript context for your TVMLKit application. Although it is possible to separate your JavaScript into separate files, to help reduce the launch time of your application we recommend creating minified and compressed version of this resource. This will allow for the resource to be retrieved and UI presented to the user quickly.
-        if let javaScriptURL = URL(string: AppDelegate.tvBootURL) {
-            appControllerContext.javaScriptApplicationURL = javaScriptURL
-        }
+//        if let javaScriptURL = URL(string: AppDelegate.tvBootURL) {
+//            appControllerContext.javaScriptApplicationURL = javaScriptURL
+//        }
+//        
+//        appControllerContext.launchOptions["BASEURL"] = AppDelegate.tvBaseURL as NSString
         
-        appControllerContext.launchOptions["BASEURL"] = AppDelegate.tvBaseURL as NSString
+        let baseURL = Bundle.main.resourceURL!
+        appControllerContext.javaScriptApplicationURL = baseURL.appendingPathComponent("app.js")
+        appControllerContext.launchOptions["BASEURL"] = baseURL.absoluteString
         
         if let launchOptions = launchOptions {
             for (kind, value) in launchOptions {
