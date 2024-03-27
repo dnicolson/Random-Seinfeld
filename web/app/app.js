@@ -26,5 +26,18 @@ ATV.start({
 	onLaunch(options) {
     ATV.Navigation.showLoading();
 		ATV.Navigation.navigate('home');
+	},
+	onError	(error) {
+		const alert = `<?xml version="1.0" encoding="UTF-8" ?>
+		<document>
+			<alertTemplate>
+				<title>${error}</title>
+				<description>The episode failed to download. Please try again.</description>
+				<button data-alert-dissmiss="close">
+					<text>OK</text>
+				</button>
+			</alertTemplate>
+		</document>`;
+		ATV.Navigation.showError({ template: alert, style: '' });
 	}
 });
