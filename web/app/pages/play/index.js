@@ -20,7 +20,7 @@ const PlayPage = ATV.Page.create({
   async ready(options, resolve, reject) {
     try {
       ATV.Navigation.showLoading();
-      const stream = await ATV.Ajax.get(`${API_URL}/download/?season=${options.season}&episode=${options.episode}`, { responseType: 'text' });
+      const stream = await ATV.Ajax.get(`${API_URL}/download?season=${options.season}&episode=${options.episode}`, { responseType: 'text' });
 
       if (stream.responseText === '{}') {
         showError(stream.status);
