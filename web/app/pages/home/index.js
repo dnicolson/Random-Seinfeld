@@ -19,7 +19,7 @@ const HomePage = ATV.Page.create({
   url: `${API_URL}/episode`,
   template: template,
   events: {
-		select: 'onSelect'
+    select: 'onSelect',
   },
   onSelect(event) {
     const targetElem = event.target;
@@ -29,31 +29,34 @@ const HomePage = ATV.Page.create({
     }
     if (targetElem.textContent === 'Choose Episode') {
       const template = `<document><formTemplate><textField id="episode-text"></textField><footer><button><text>Play</text></button></footer></formTemplate></document>`;
+      // eslint-disable-next-line no-undef
       const parser = new DOMParser();
-      const doc = parser.parseFromString(template , "application/xml");
-      const episodeText = doc.getElementById("episode-text");
-      doc.addEventListener("select", () => {
+      const doc = parser.parseFromString(template, 'application/xml');
+      const episodeText = doc.getElementById('episode-text');
+      doc.addEventListener('select', () => {
         const input = episodeText.getFeature('Keyboard').text;
+        // eslint-disable-next-line no-undef
         navigationDocument.dismissModal();
-        const [season, episode] = [parseInt(input.substr(0,2), 10), parseInt(input.substr(2,2), 10)];
-        ATV.Navigation.navigate('play', {season, episode});
+        const [season, episode] = [parseInt(input.substr(0, 2), 10), parseInt(input.substr(2, 2), 10)];
+        ATV.Navigation.navigate('play', { season, episode });
       });
+      // eslint-disable-next-line no-undef
       navigationDocument.presentModal(doc);
     }
-	},
-  data: response => {
+  },
+  data: (response) => {
     return {
-        episodeName: response.episodeName,
-        image: response.image,
-        season: response.season,
-        episode: response.episode,
-        description: response.description,
-        director: response.director,
-        writers: response.writers,
-        guestStars: response.guestStars,
-        firstAired: response.firstAired,
-        siteRating: response.siteRating / 10,
-        contentRating: response.contentRating
+      episodeName: response.episodeName,
+      image: response.image,
+      season: response.season,
+      episode: response.episode,
+      description: response.description,
+      director: response.director,
+      writers: response.writers,
+      guestStars: response.guestStars,
+      firstAired: response.firstAired,
+      siteRating: response.siteRating / 10,
+      contentRating: response.contentRating,
     };
   },
 });

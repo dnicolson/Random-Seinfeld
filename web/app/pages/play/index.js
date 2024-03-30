@@ -1,7 +1,7 @@
 import ATV from 'atvjs';
 import { API_URL } from 'config';
 
-const showError = code => {
+const showError = (code) => {
   const alert = `<?xml version="1.0" encoding="UTF-8" ?>
       <document>
         <alertTemplate>
@@ -17,18 +17,23 @@ const showError = code => {
 
 const PlayPage = ATV.Page.create({
   name: 'play',
-  async ready(options, resolve, reject) {
+  async ready(options, resolve) {
     try {
       ATV.Navigation.showLoading();
-      const stream = await ATV.Ajax.get(`${API_URL}/download?season=${options.season}&episode=${options.episode}`, { responseType: 'text' });
+      const stream = await ATV.Ajax.get(`${API_URL}/download?season=${options.season}&episode=${options.episode}`, {
+        responseType: 'text',
+      });
 
       if (stream.responseText === '{}') {
         showError(stream.status);
         return;
       }
 
+      // eslint-disable-next-line no-undef
       const player = new Player();
+      // eslint-disable-next-line no-undef
       const mediaItem = new MediaItem('video', stream.responseText.trimEnd());
+      // eslint-disable-next-line no-undef
       const playlist = new Playlist();
 
       playlist.push(mediaItem);
@@ -44,8 +49,8 @@ const PlayPage = ATV.Page.create({
       resolve(false);
     } catch (error) {
       showError(error.status);
-    };
-  }
+    }
+  },
 });
 
 export default PlayPage;
