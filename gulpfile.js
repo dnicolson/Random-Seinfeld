@@ -28,7 +28,7 @@ gulp.task('scripts', function () {
     .pipe($.connect.reload());
 });
 
-gulp.task('serve', function () {
+gulp.task('serve', async function () {
   $.connect.server({
     root: dist,
     port: port,
@@ -49,26 +49,17 @@ gulp.task('static', function () {
     .pipe(gulp.dest(dist + 'assets/'));
 });
 
-gulp.task('watch', function () {
-  gulp.watch(src + 'assets/**/*', ['static']);
-  gulp.watch(src + '**/*.js', ['scripts']);
-  gulp.watch(src + '**/*.hbs', ['scripts']);
-  gulp.watch(src + '**/*.json', ['scripts']);
-  gulp.watch(src + '**/*.css', ['scripts']);
+gulp.task('watch', async function () {
+  gulp.watch(src + 'assets/**/*', gulp.series('static'));
+  gulp.watch([src + '**/*.js', src + '**/*.hbs', src + '**/*.json', src + '**/*.css'], gulp.series('scripts'));
 });
 
-gulp.task('clean', function (cb) {
-  del([dist]).then(function () {
-    cb();
-  });
+gulp.task('clean', async function () {
+  await del([dist]);
 });
-
-var defaultTasks = ['static', 'scripts'];
 
 // waits until clean is finished then builds the project
-gulp.task('build', ['clean'], function () {
-  gulp.start(defaultTasks);
-});
+gulp.task('build', gulp.series('clean', gulp.parallel('static', 'scripts')));
 
 // by default build project and then watch files
-gulp.task('default', ['build', 'serve', 'watch']);
+gulp.task('default', gulp.series('build', gulp.parallel('serve', 'watch')));
