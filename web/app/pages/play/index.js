@@ -46,6 +46,10 @@ const PlayPage = ATV.Page.create({
         }
       });
 
+      player.addEventListener('playbackError', (event) => {
+        showError(event.error.code);
+      });
+
       resolve(false);
     } catch (error) {
       showError(error.status);
