@@ -1,6 +1,10 @@
 import ATV from 'atvjs';
 import loaderTpl from 'shared/templates/loader.hbs';
 import errorTpl from 'shared/templates/error.hbs';
+// eslint-disable-next-line no-unused-vars
+import HomePage from 'pages/home';
+// eslint-disable-next-line no-unused-vars
+import PlayPage from 'pages/play';
 
 ATV.start({
   templates: {
