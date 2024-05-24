@@ -1,13 +1,13 @@
 import ATV from 'atvjs';
 import { API_URL } from 'config';
 
-const showError = (code) => {
+const showError = (code, message = '') => {
   const alert = `<?xml version="1.0" encoding="UTF-8" ?>
       <document>
         <alertTemplate>
           <title>Error (${code})</title>
-          <description>The episode failed to download. Please try again.</description>
-          <button data-alert-dissmiss="close">
+          <description>${message}\n\nThe episode failed to download. Please try again.</description>
+          <button data-alert-dismiss="close">
             <text>OK</text>
           </button>
         </alertTemplate>
@@ -52,7 +52,7 @@ const PlayPage = ATV.Page.create({
 
       resolve(false);
     } catch (error) {
-      showError(error.status);
+      showError(error.status, error.responseText);
     }
   },
 });
