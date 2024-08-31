@@ -2,17 +2,16 @@ import ATV from 'atvjs';
 import { API_URL } from 'config';
 
 const showError = (code, message = '') => {
-  const alert = `<?xml version="1.0" encoding="UTF-8" ?>
-      <document>
-        <alertTemplate>
-          <title>Error (${code})</title>
-          <description>${message}\n\nThe episode failed to download. Please try again.</description>
-          <button data-alert-dismiss="close">
-            <text>OK</text>
-          </button>
-        </alertTemplate>
-      </document>`;
-  ATV.Navigation.showError({ template: alert, style: '' });
+  const alert = `<document>
+    <alertTemplate>
+      <title>Error (${code})</title>
+      <description>${message}\n\nThe episode failed to download. Please try again.</description>
+      <button data-alert-dissmiss="close">
+        <text>OK</text>
+      </button>
+    </alertTemplate>
+  </document>`;
+  ATV.Navigation.showError({ template: alert, style: '', type: 'modal' });
 };
 
 const PlayPage = ATV.Page.create({

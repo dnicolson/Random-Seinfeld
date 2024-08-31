@@ -33,8 +33,7 @@ ATV.start({
     ATV.Navigation.navigate('home');
   },
   onError(error) {
-    const alert = `<?xml version="1.0" encoding="UTF-8" ?>
-		<document>
+    const alert = `<document>
 			<alertTemplate>
 				<title>${error}</title>
 				<description>The episode failed to download. Please try again.</description>
@@ -43,6 +42,6 @@ ATV.start({
 				</button>
 			</alertTemplate>
 		</document>`;
-    ATV.Navigation.showError({ template: alert, style: '' });
+    ATV.Navigation.showError({ template: alert, style: '', type: 'modal' });
   },
 });
