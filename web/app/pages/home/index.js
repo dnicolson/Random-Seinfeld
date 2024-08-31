@@ -14,6 +14,10 @@ const presentModal = (title, description) => {
   ATV.Navigation.presentModal({ template: info, style: '' });
 };
 
+let season;
+let episode;
+let highQuality = true;
+
 const HomePage = ATV.Page.create({
   name: 'home',
   url: `${API_URL}/episode`,
@@ -27,6 +31,9 @@ const HomePage = ATV.Page.create({
       const body = targetElem.textContent;
       presentModal('', body);
     }
+    if (targetElem.textContent === 'Play') {
+      ATV.Navigation.navigate('play', { season, episode, highQuality });
+    }
     if (targetElem.textContent === 'Choose Episode') {
       const template = `<document><formTemplate><textField id="episode-text"></textField><footer><button><text>Play</text></button></footer></formTemplate></document>`;
       // eslint-disable-next-line no-undef
@@ -38,13 +45,24 @@ const HomePage = ATV.Page.create({
         // eslint-disable-next-line no-undef
         navigationDocument.dismissModal();
         const [season, episode] = [parseInt(input.substr(0, 2), 10), parseInt(input.substr(2, 2), 10)];
-        ATV.Navigation.navigate('play', { season, episode });
+        ATV.Navigation.navigate('play', { season, episode, highQuality });
       });
       // eslint-disable-next-line no-undef
       navigationDocument.presentModal(doc);
     }
+    if (targetElem.textContent.startsWith('Quality')) {
+      highQuality = !highQuality;
+      if (highQuality) {
+        targetElem.lastChild.textContent = 'Quality: High';
+      } else {
+        targetElem.lastChild.textContent = 'Quality: Low';
+      }
+    }
   },
   data: (response) => {
+    season = response.season;
+    episode = response.episode;
+
     return {
       episodeName: response.episodeName,
       image: response.image,
@@ -57,6 +75,7 @@ const HomePage = ATV.Page.create({
       firstAired: response.firstAired,
       siteRating: response.siteRating / 10,
       contentRating: response.contentRating,
+      quality: highQuality ? 'Quality: High' : 'Quality: Low',
     };
   },
 });

@@ -36,7 +36,7 @@
         </row>
         <description handlesOverflow="true">{{ description }}</description>
         <row>
-          <buttonLockup data-href-page="play" data-href-page-options='{"season": {{ season }}, "episode": {{ episode }} }'>
+          <buttonLockup>
             <badge src="resource://button-preview" />
             <title>Play</title>
           </buttonLockup>
@@ -47,6 +47,10 @@
           <buttonLockup>
             <badge src="resource://button-add" />
             <title>Choose Episode</title>
+          </buttonLockup>
+          <buttonLockup>
+            <badge src="resource://button-more" />
+            <title>{{ quality }}</title>
           </buttonLockup>
         </row>
       </stack>
