@@ -4,13 +4,16 @@ import { API_URL } from 'config';
 
 const presentModal = (title, description) => {
   const info = `<?xml version="1.0" encoding="UTF-8" ?>
-      <document>
-          <descriptiveAlertTemplate>
-              <title>${title}</title>
-              <description>${description}</description>
-          </descriptiveAlertTemplate>
-      </document>
-  `;
+  <document>
+      <alertTemplate>
+          <title>${title}</title>
+          <description>${description}</description>
+          <button data-alert-dissmiss="close">
+              <text>OK</text>
+          </button>
+      </alertTemplate>
+  </document>
+`;
   ATV.Navigation.presentModal({ template: info, style: '' });
 };
 
@@ -42,6 +45,11 @@ const HomePage = ATV.Page.create({
       const episodeText = doc.getElementById('episode-text');
       doc.addEventListener('select', () => {
         const input = episodeText.getFeature('Keyboard').text;
+        if (!input) {
+          presentModal('Error', 'Please enter an episode number in the format SSEE.');
+          return;
+        }
+
         // eslint-disable-next-line no-undef
         navigationDocument.dismissModal();
         const [season, episode] = [parseInt(input.substr(0, 2), 10), parseInt(input.substr(2, 2), 10)];
